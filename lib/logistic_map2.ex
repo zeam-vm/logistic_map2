@@ -91,18 +91,27 @@ defmodule LogisticMap2 do
 
   def score_list(function) do
   	Stream.unfold(0, fn acc ->
-  		{result, time, acc} = benchmark(function, acc)
+  		{_result, time, acc} = benchmark(function, acc)
   		if acc > @scoring_time do nil else {time, acc} end
   	end)
   	|> Enum.to_list
   end
 
-  def show_score(function) do
-  	IO.inspect function
-  	show_verification(function)
+  def show_score({name, function}) do
   	score_list = score_list(function)
   	score = Kernel.length(score_list)
   	sd = standard_deviation(score_list)
+  	IO.puts name
+  	show_verification(function)
   	IO.puts "score: #{score} ± #{sd}"
+  end
+
+  def all_benchmarks() do
+  	[
+  		{"Benchmark recursive", &benchmark_recursive/1},
+  		{"Benchmark Enum",      &benchmark_enum/1},
+  		{"Benchmark Flow",      &benchmark_flow/1},
+  	]
+  	|> Enum.each(& show_score(&1))
   end
 end
