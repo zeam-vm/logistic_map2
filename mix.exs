@@ -6,6 +6,12 @@ defmodule LogisticMap2.MixProject do
       app: :logistic_map2,
       version: "0.1.0",
       elixir: "~> 1.7",
+      description: "Benchmark of Logistic Map using integer calculation.",
+      package: [
+        maintainers: ["Susumu Yamazaki"],
+        licenses: ["Apache 2.0"],
+        links: %{"GitHub" => "https://github.com/zeam-vm/logistic_map2"}
+      ],
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]

@@ -102,8 +102,8 @@ defmodule LogisticMap2 do
   	score = Kernel.length(score_list)
   	sd = standard_deviation(score_list)
   	IO.puts name
-  	show_verification(function)
   	IO.puts "score: #{score} ± #{sd}"
+  	show_verification(function)
   end
 
   def all_benchmarks() do
