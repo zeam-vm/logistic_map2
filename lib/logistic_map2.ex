@@ -108,9 +108,9 @@ defmodule LogisticMap2 do
 
   def all_benchmarks() do
   	[
-  		{"Benchmark recursive", &benchmark_recursive/1},
-  		{"Benchmark Enum",      &benchmark_enum/1},
-  		{"Benchmark Flow",      &benchmark_flow/1},
+  		{"Benchmark Elixir recursive", &benchmark_recursive/1},
+  		{"Benchmark Elixir Enum",      &benchmark_enum/1},
+  		{"Benchmark Elixir Flow",      &benchmark_flow/1},
   	]
   	|> Enum.each(& show_score(&1))
   end
