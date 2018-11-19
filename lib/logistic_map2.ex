@@ -113,6 +113,8 @@ defmodule LogisticMap2 do
   		{"Benchmark Elixir Flow",      &benchmark_flow/1},
   		{"Benchmark Rust Single Thread",             &LogisticMap2Nif.benchmark_rust_single/1},
   		{"Benchmark Rust Multi Thread",             &LogisticMap2Nif.benchmark_rust_multi/1},
+      {"Benchmark Rust Multi Thread with Thread Pool",             &LogisticMap2Nif.benchmark_rust_multi_tp/1},
+      {"Benchmark Rust Multi Thread with Thread Pool in lazy_static",             &LogisticMap2Nif.benchmark_rust_multi_tp_ls/1},
   	]
   	|> Enum.each(& show_score(&1))
   end

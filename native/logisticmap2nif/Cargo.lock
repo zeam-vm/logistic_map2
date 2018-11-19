@@ -78,6 +78,7 @@ name = "logisticmap2nif"
 version = "0.1.0"
 dependencies = [
  "lazy_static 1.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "num_cpus 1.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "rayon 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustler 0.18.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustler_codegen 0.18.0 (registry+https://github.com/rust-lang/crates.io-index)",
