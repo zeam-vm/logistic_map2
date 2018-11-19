@@ -4,6 +4,9 @@
 
 use rustler::{Env, Term, NifResult, Encoder};
 
+const P: i64 = 6700417;
+const MU: i64 = 22;
+
 mod atoms {
     rustler_atoms! {
         atom ok;
@@ -16,14 +19,13 @@ mod atoms {
 rustler_export_nifs! {
     "Elixir.LogisticMap2Nif",
     [
-        ("add", 2, add),
+        ("benchmark_rust_single", 1, benchmark_rust_single),
     ],
     None
 }
 
-fn add<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
-    let num1: i64 = try!(args[0].decode());
-    let num2: i64 = try!(args[1].decode());
 
-    Ok((atoms::ok(), num1 + num2).encode(env))
+fn benchmark_rust_single<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    let size: i64 = try!(args[0].decode());
+    Ok((1..=size).collect::<Vec<i64>>().iter().map(|&x| (x, MU * x * (x + 1) % P)).collect::<Vec<(i64, i64)>>().encode(env))
 }

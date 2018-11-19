@@ -111,6 +111,7 @@ defmodule LogisticMap2 do
   		{"Benchmark Elixir recursive", &benchmark_recursive/1},
   		{"Benchmark Elixir Enum",      &benchmark_enum/1},
   		{"Benchmark Elixir Flow",      &benchmark_flow/1},
+  		{"Benchmark Rust Single Thread",             &LogisticMap2Nif.benchmark_rust_single/1}
   	]
   	|> Enum.each(& show_score(&1))
   end
