@@ -12,8 +12,19 @@ defmodule LogisticMap2.MixProject do
         licenses: ["Apache 2.0"],
         links: %{"GitHub" => "https://github.com/zeam-vm/logistic_map2"}
       ],
+      compilers: [:rustler] ++ Mix.compilers,
+      rustler_crates: rustler_crates(),
       start_permanent: Mix.env() == :prod,
       deps: deps()
+    ]
+  end
+
+  defp rustler_crates() do
+    [
+      logistic_map2_nif: [
+        path: "native/logisticmap2nif",
+        mode: :release,
+      ]
     ]
   end
 
@@ -27,7 +38,8 @@ defmodule LogisticMap2.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:flow, "~> 0.14.0"}
+      {:flow, "~> 0.14.0"},
+      {:rustler, "~> 0.18.0"}
     ]
   end
 end
