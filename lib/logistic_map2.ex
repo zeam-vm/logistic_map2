@@ -58,9 +58,8 @@ defmodule LogisticMap2 do
   	]
   end
 
-  def show_verification(function) do
-  	result = benchmark(function, 0)
-  	IO.inspect verify_all(result, reference(result))
+  def show_verification(result, reference) do
+  	IO.inspect verify_all(result, reference)
   end
 
   def sum(list) do
@@ -97,16 +96,19 @@ defmodule LogisticMap2 do
   	|> Enum.to_list
   end
 
-  def show_score({name, function}) do
+  def show_score({name, function}, reference) do
+    result = benchmark(function, 0)
   	score_list = score_list(function)
   	score = Kernel.length(score_list)
   	sd = standard_deviation(score_list)
   	IO.puts name
   	IO.puts "score: #{score} ± #{sd}"
-  	show_verification(function)
+  	show_verification(result, reference)
   end
 
   def all_benchmarks() do
+    reference = benchmark(&benchmark_recursive/1, 0) |> reference()
+
   	[
   		{"Benchmark Elixir recursive", &benchmark_recursive/1},
   		{"Benchmark Elixir Enum",      &benchmark_enum/1},
@@ -116,6 +118,6 @@ defmodule LogisticMap2 do
       {"Benchmark Rust Multi Thread with Thread Pool",             &LogisticMap2Nif.benchmark_rust_multi_tp/1},
       {"Benchmark Rust Multi Thread with Thread Pool in lazy_static",             &LogisticMap2Nif.benchmark_rust_multi_tp_ls/1},
   	]
-  	|> Enum.each(& show_score(&1))
+  	|> Enum.each(& show_score(&1, reference))
   end
 end
